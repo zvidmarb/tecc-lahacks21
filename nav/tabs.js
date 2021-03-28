@@ -6,10 +6,11 @@ import ProfileScreen from "../pages/ProfileScreen";
 import FriendsScreen from "../pages/FriendsScreen";
 import LoginScreen from "../pages/LoginScreen";
 import {LoginStackScreen} from "../App";
+import { useLinkProps } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
- const Tabs = () => {
+ const Tabs = (props) => {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -40,7 +41,7 @@ const Tab = createBottomTabNavigator();
             }}
             backBehavior={'none'}
         >
-            <Tab.Screen name="Profile" component={ProfileScreen} />
+            <Tab.Screen name="Profile" children={() => <ProfileScreen email={props.route.params.username} />} />
             <Tab.Screen name="Friends" component={FriendsScreen} />
         </Tab.Navigator>
     )

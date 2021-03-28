@@ -6,7 +6,7 @@ export default class ProfileScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: this.props.route.params.username,
+            username: this.props.email,
             restaurants: []
         };
     }
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     headerName: {
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: 20,
         flex: 0.7
     },
     itemContainer: {
