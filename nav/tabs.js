@@ -4,6 +4,8 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs"
 import { MaterialIcons } from '@expo/vector-icons'; 
 import ProfileScreen from "../pages/ProfileScreen";
 import FriendsScreen from "../pages/FriendsScreen";
+import LoginScreen from "../pages/LoginScreen";
+import LoginStackScreen from "../App";
 
 const Tab = createBottomTabNavigator();
 
@@ -40,6 +42,7 @@ const Tab = createBottomTabNavigator();
         >
             <Tab.Screen name="Profile" component={ProfileScreen} />
             <Tab.Screen name="Friends" component={FriendsScreen} />
+            <Tab.Screen name="Login" component={LoginStackScreen} />
         </Tab.Navigator>
     )
 }
