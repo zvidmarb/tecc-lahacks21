@@ -6,6 +6,7 @@ import ProfileScreen from "./pages/ProfileScreen";
 import FriendsScreen from "./pages/FriendsScreen";
 import Tabs from "./nav/tabs";
 import LoginScreen from './pages/LoginScreen';
+import SignUpScreen from './pages/SignUpScreen';
 
 
 const Stack = createStackNavigator();
@@ -17,6 +18,8 @@ export function LoginStackScreen() {
       <LoginStack.Navigator headerMode="none">
         <LoginStack.Screen name="Login" component={LoginScreen} />
         <LoginStack.Screen name = "Tabs" component={Tabs}/>
+        <LoginStack.Screen name = "SignUp" component={SignUpScreen} />
+        <LoginStack.Screen name = "Temp" component={FriendsScreen} />
       </LoginStack.Navigator>
   );
 }

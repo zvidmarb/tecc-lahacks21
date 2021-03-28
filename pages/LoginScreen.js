@@ -1,9 +1,8 @@
 import {Container, Content, Header, Form, Input, Item, Button, Label} from "native-base";
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Alert} from "react-native";
 import {setUpFirebase} from "../Firebase";
 import * as firebase from "firebase";
-
 
 
 export default class LoginScreen extends Component {
@@ -16,25 +15,38 @@ export default class LoginScreen extends Component {
             password: "",
         })
     }
-    signUpUser = (email, password) =>{
-            firebase.auth().createUserWithEmailAndPassword(email,password).catch(error => {
-                Alert.alert(
-                    "Unable to Register Email",
-                    "This email is already in use.",
-                    [
-                      {
-                        text: "Cancel",
-                        onPress: () => console.log("Cancel Pressed"),
-                        style: "cancel"
-                      },
-                      { text: "OK", onPress: () => console.log("OK Pressed") }
-                    ]
-                  );
-            })           
-    }
+    // App() {
+    //     // Set an initializing state whilst Firebase connects
+    //     const [initializing, setInitializing] = useState(true);
+    //     const [user, setUser] = useState();
+      
+    //     // Handle user state changes
+    //     function onAuthStateChanged(user) {
+    //       setUser(user);
+    //       if (initializing) setInitializing(false);
+    //     }
+      
+    //     useEffect(() => {
+    //       const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    //       return subscriber; // unsubscribe on unmount
+    //     }, []);
+      
+    //     if (initializing) return null;
+
+    //     if (!user) {
+    //         return (
+    //             this.props.navigation.navigate("Login")
+    //         );
+    //       }
+        
+    //       return (
+    //         this.props.navigation.navigate("Temp")
+    //       );
+    //     }
+
     loginUser = (email, password) =>{
             firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
-                this.props.navigation.navigate("Tabs", {username: email});
+                this.props.navigation.navigate("Temp", {username: email});
             }).catch(error => {
                 Alert.alert(
                     "Incorrect Credentials",
@@ -85,7 +97,7 @@ export default class LoginScreen extends Component {
                         <Button style = {styles.button}
                         full
                         info
-                        onPress={()=> this.signUpUser(this.state.email, this.state.password)}
+                        onPress={()=> this.props.navigation.navigate("SignUp")}
                         >
                             <Text>Sign Up</Text>
                         </Button>
