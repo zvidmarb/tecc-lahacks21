@@ -1,8 +1,10 @@
-import {Container, Content, Header, Form, Input, Item, Button, Label, Root } from "native-base";
-import React, {Component} from 'react';
-import {View, Text, StyleSheet} from "react-native";
+import {Container, Content, Header, Form, Input, Item, Button, Label} from "native-base";
+import React, {Component, useState} from 'react';
+import {View, Text, StyleSheet, Alert} from "react-native";
 import {setUpFirebase} from "../Firebase";
 import * as firebase from "firebase";
+
+
 
 export default class LoginScreen extends Component {
     constructor(props){
@@ -14,24 +16,40 @@ export default class LoginScreen extends Component {
             password: "",
         })
     }
-    
     signUpUser = (email, password) =>{
-        try {
-            firebase.auth().createUserWithEmailAndPassword(email,password)
-        } catch (error) {
-            console.log(error.toString());
-        }
+            firebase.auth().createUserWithEmailAndPassword(email,password).catch(error => {
+                Alert.alert(
+                    "Unable to Register Email",
+                    "This email is already in use.",
+                    [
+                      {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                      },
+                      { text: "OK", onPress: () => console.log("OK Pressed") }
+                    ]
+                  );
+            })           
     }
     loginUser = (email, password) =>{
-        try {
-            firebase.auth().signInWithEmailAndPassword(email, password).then(function(user){
-                console.log(user.toString())
+            firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
+                this.props.navigation.navigate("Tabs");
+            }).catch(error => {
+                Alert.alert(
+                    "Incorrect Credentials",
+                    "The password or email you entered was incorrect.",
+                    [
+                      {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                      },
+                      { text: "OK", onPress: () => console.log("OK Pressed") }
+                    ]
+                  );
             })
-        } catch (error) {
-            console.log(error.toString());
         }
-    }
-
 
     render() {
             return (

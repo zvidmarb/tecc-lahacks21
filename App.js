@@ -29,7 +29,7 @@ export default function App() {
           }}
           initialRouteName={"Profile"}
       >
-        <Stack.Screen name = "Tabs" component = {Tabs}/>
+        <Stack.Screen name = "Login" component = {LoginStackScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
