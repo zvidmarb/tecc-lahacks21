@@ -10,7 +10,7 @@ export default class ProfileScreen extends Component {
             restaurants: []
         };
     }
-
+    
     componentDidMount = async () => {
         let updatedRestaurants = await getData('restaurants');
         this.setState({restaurants: updatedRestaurants});
